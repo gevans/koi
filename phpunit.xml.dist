@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="true"
+         syntaxCheck="false"
+         bootstrap="../unittest/bootstrap.php">
+
+  <testsuites>
+    <testsuite name="Koi Test Suite">
+      <directory>./tests/koi</directory>
+    </testsuite>
+  </testsuites>
+
+  <group>
+    <!-- Exclude remote tests by default -->
+    <exclude>koi.remote</exclude>
+  </group>
+
+  <php>
+    <server name="KOHANA_ENV" value="testing" />
+  </php>
+
+</phpunit>

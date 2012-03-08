@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+env:
+  - KO_SANDBOX=/home/vagrant/kohana
+
+before_script:
+  - ./tests/travis_setup.php
+
+script: phpunit -c phpunit.xml.dist --bootstrap $KO_SANDBOX/modules/unittest/bootstrap.php
+
+notification:
+  email: "gabriel@codeconcoction.com"
