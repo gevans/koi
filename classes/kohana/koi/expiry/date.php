@@ -41,14 +41,7 @@ class Kohana_Koi_Expiry_Date {
 	 */
 	public function expiration()
 	{
-		try
-		{
-			return mktime(23, 59, 59, $this->month, $this->month_days(), $this->year);
-		}
-		catch (ErrorException $e)
-		{
-			return 0;
-		}
+		return (checkdate($this->month, 1, $this->year)) ? mktime(23, 59, 59, $this->month, $this->month_days(), $this->year) : 0;
 	}
 
 	/**
@@ -68,7 +61,15 @@ class Kohana_Koi_Expiry_Date {
 	 */
 	protected function month_days()
 	{
-		return cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
+		if (function_exists('cal_days_in_month'))
+		{
+			return cal_days_in_month(CAL_GREGORIAN, $this->month, $this->year);
+		}
+		else
+		{
+			// see http://php.net/manual/en/function.cal-days-in-month.php#104427
+			return date('t', mktime(0, 0, 0, $this->month, 1, $this->year));
+		}
 	}
 
 } // End Koi_Expiry_Date
