@@ -5,10 +5,8 @@
  * @group koi
  * @group koi.credit_card
  *
- * @package    Koi
- * @category   Tests
- * @copyright  (c) 2012 Gabriel Evans
- * @license    http://www.opensource.org/licenses/mit-license.php  MIT license
+ * @package   Koi
+ * @category  Tests
  */
 class Koi_Expiry_DateTest extends Unittest_TestCase {
 
