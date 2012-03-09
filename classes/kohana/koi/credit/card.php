@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * The `Koi_Credit_Card` class provides helpers for validating credit card info,
- * determining a card's type (Visa, MasterCard, etc.), and re
+ * The `Koi_Credit_Card` class provides various helpers for validating and
+ * storing credit cards as well as determining a card's type.
  *
  *     $credit_card = Koi::credit_card($this->request->post('credit_card'));
  *
@@ -14,6 +14,7 @@
  *     else
  *     {
  *         // This card is invalid or expired.
+ *         $errors = $credit_card->errors('credit_card');
  *     }
  *
  * @package   Koi
@@ -139,7 +140,7 @@ class Kohana_Koi_Credit_Card {
 	 *     Koi::credit_card(array('number' => '4242424242424242'))
 	 *         ->display_number(); // => XXXX-XXXX-XXXX-4242
 	 *
-	 * @return [type]
+	 * @return  string
 	 */
 	public function display_number()
 	{
@@ -284,6 +285,20 @@ class Kohana_Koi_Credit_Card {
 	/**
 	 * Returns credit card information as an array.
 	 *
+	 *     $credit_card->as_array();
+	 *
+	 * Returns an array similar to:
+	 *
+	 *     array(
+	 *         'number'             => '4242424242424242',
+	 *         'month'              => 1,
+	 *         'year'               => 2014,
+	 *         'type'               => 'visa',
+	 *         'first_name'         => 'John',
+	 *         'last_name'          => 'Wayne',
+	 *         'verification_value' => '123',
+	 *     );
+	 *
 	 * @return  array
 	 */
 	public function as_array()
@@ -307,38 +322,43 @@ class Kohana_Koi_Credit_Card {
 	 */
 	protected function run_filters()
 	{
-		$card = array(
-			'number'             => $this->number,
-			'month'              => ($this->month === NULL) ? NULL : (int) $this->month,
-			'year'               => ($this->year === NULL) ? NULL : (int) $this->year,
-			'type'               => $this->type,
-			'first_name'         => $this->first_name,
-			'last_name'          => $this->last_name,
-			'verification_value' => $this->verification_value,
-			'start_month'        => ($this->start_month !== NULL) ? (int) $this->start_month : $this->start_month,
-			'start_year'         => ($this->start_year !== NULL) ? (int) $this->start_year : $this->start_year,
-			'issue_number'       => $this->issue_number,
-		);
+		if ($this->month !== NULL)
+		{
+			$this->month = (int) $this->month;
+		}
+
+		if ($this->year !== NULL)
+		{
+			$this->year = (int) $this->year;
+		}
+
+		if ($this->start_month !== NULL)
+		{
+			$this->start_month = (int) $this->start_month;
+		}
+
+		if ($this->start_year !== NULL)
+		{
+			$this->start_year = (int) $this->start_year;
+		}
 
 		if (Koi_Valid::test_mode_card_number($this->number))
 		{
-			$this->type = $card['type'] = 'bogus';
+			$this->type = 'bogus';
 		}
 		else
 		{
-			$card['number'] = preg_replace('/[^\d]/', '', $this->number);
+			$this->number = preg_replace('/[^\d]/', '', $this->number);
 		}
 
 		if ($this->type !== NULL)
 		{
-			$card['type'] = strtolower($this->type);
+			$this->type = strtolower($this->type);
 		}
 		else
 		{
-			$card['type'] = Koi_Valid::type($this->number);
+			$this->type = Koi_Valid::type($this->number);
 		}
-
-		$this->_attributes = $card;
 	}
 
 	/**
