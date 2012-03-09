@@ -8,7 +8,7 @@
  * @package   Koi
  * @category  Tests
  */
-class Koi_Expiry_DateTest extends Unittest_TestCase {
+class Koi_Expiry_DateTest extends Koi_Unittest_TestCase {
 
 	/**
 	 * Expiration dates in the past should be expired.

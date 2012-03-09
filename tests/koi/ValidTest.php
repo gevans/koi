@@ -3,12 +3,13 @@
  * Tests Koi validation methods.
  *
  * @group koi
- * @group koi.valid
+ * @group koi.credit_card
+ * @group koi.security
  *
  * @package   Koi
  * @category  Tests
  */
-class Koi_ValidTest extends Unittest_TestCase {
+class Koi_ValidTest extends Koi_Unittest_TestCase {
 
 	/**
 	 * Tests Koi_Valid::expiry_month()
