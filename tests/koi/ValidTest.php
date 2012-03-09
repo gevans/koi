@@ -119,6 +119,17 @@ class Koi_ValidTest extends Koi_Unittest_TestCase {
 	 * @test
 	 * @return  void
 	 */
+	public function test_should_correctly_identify_card_type()
+	{
+		$this->assertEquals('visa', Koi_Valid::type('4242424242424242'));
+		$this->assertEquals('american_express', Koi_Valid::type('341111111111111'));
+		$this->assertNull(Koi_Valid::type(''));
+	}
+
+	/**
+	 * @test
+	 * @return  void
+	 */
 	public function test_should_be_dankort_card_type()
 	{
 		$this->assertEquals('dankort', Koi_Valid::type('5019717010103742'));
@@ -450,13 +461,8 @@ class Koi_ValidTest extends Koi_Unittest_TestCase {
 	 */
 	public function test_should_be_test_mode_card_number($number)
 	{
-		$old_mode = Koi::$mode;
-		Koi::$mode = Koi::TESTING;
-
 		$this->assertTrue(Koi_Valid::test_mode_card_number($number));
 		$this->assertEquals('bogus', Koi_Valid::type($number));
-
-		Koi::$mode = $old_mode;
 	}
 
 	/**

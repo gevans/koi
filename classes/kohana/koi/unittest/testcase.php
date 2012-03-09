@@ -6,6 +6,10 @@
  */
 abstract class Kohana_Koi_Unittest_TestCase extends Kohana_Unittest_TestCase {
 
+	protected $environmentDefault = array(
+		'Koi::$mode' => Koi::TESTING,
+	);
+
 	protected function credit_card($number = '4242424242424242', array $options = array())
 	{
 		$defaults = array(
