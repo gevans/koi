@@ -4,7 +4,7 @@
  *
  * @group koi
  * @group koi.credit_card
- * @group koi.security
+ * @group koi.validation
  *
  * @package   Koi
  * @category  Tests

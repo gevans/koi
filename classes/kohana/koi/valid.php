@@ -3,7 +3,7 @@
  * Koi validation rules.
  *
  * @package   Koi
- * @category  Security
+ * @category  Validation
  */
 class Kohana_Koi_Valid {
 
