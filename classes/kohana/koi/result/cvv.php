@@ -7,7 +7,7 @@
  * @package   Koi
  * @category  Validation
  */
-class Kohana_Koi_Result_CVV {
+class Kohana_Koi_Result_Cvv {
 
 	protected static $messages = array(
 		'D' => 'Suspicious transaction',
@@ -25,48 +25,35 @@ class Kohana_Koi_Result_CVV {
 
 	public static function messages()
 	{
-		return Koi_Result_CVV::$messages;
+		return Koi_Result_Cvv::$messages;
 	}
 
-	/**
-	 * @var  string  Result code
-	 */
-	protected $code = NULL;
-
-	/**
-	 * @var  string  Result message
-	 */
-	protected $message = NULL;
+	protected $attributes = array();
 
 	public function __construct($code)
 	{
-		$this->code    = ( ! empty($code)) ? strtoupper($code) : NULL;
-		$this->message = Arr::get(Koi_Result_CVV::$messages, $code);
+		$this->attributes = array(
+			'code'    => ( ! empty($code)) ? strtoupper($code) : NULL,
+			'message' => Arr::get(Koi_Result_Cvv::$messages, $code),
+		);
 	}
 
 	public function __get($key)
 	{
-		switch ($key)
+		if (array_key_exists($key, $this->attributes))
 		{
-			case 'code':
-				return $this->code;
-			break;
-			case 'message':
-				return $this->message;
-			break;
-			default:
-				throw new Kohana_Exception('The :property property does not exist in the Koi_Result_CVV class',
-					array(':property' => $key));
-			break;
+			return $this->attributes[$key];
+		}
+		else
+		{
+			throw new Kohana_Exception('The :property property does not exist in the Koi_Result_CVV class',
+				array(':property' => $key));
 		}
 	}
 
 	public function as_array()
 	{
-		return array(
-			'code'    => $this->code,
-			'message' => $this->message,
-		);
+		return $this->attributes;
 	}
 
 } // End Koi_Result_CVV
