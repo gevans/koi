@@ -8,11 +8,15 @@
 $repos = array(
 	'system' => array(
 		'url'    => 'git://github.com/kohana/core.git',
-		'branch' => '3.2/master'
+		'branch' => '3.2/master',
 	),
 	'unittest' => array(
 		'url'    => 'git://github.com/kohana/unittest.git',
-		'branch' => '3.2/master'
+		'branch' => '3.2/master',
+	),
+	'mimic' => array(
+		'url'    => 'git://github.com/acoulton/mimic.git',
+		'branch' => 'master',
 	),
 	'koi' => TRUE,
 );
@@ -86,5 +90,5 @@ mkdir($root.'/application/cache');
 mkdir($root.'/application/logs');
 file_put_contents($root.'/application/sandbox_modules.php',"<?php \n return ".var_export($modules, TRUE).';');
 
-copy('tests/travis_bootstrap.php', $root.'/application/bootstrap.php');
+copy('.travis/bootstrap.php', $root.'/application/bootstrap.php');
 echo "Sandbox install complete in $root\n";
