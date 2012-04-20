@@ -481,4 +481,27 @@ class Koi_ValidTest extends Koi_Unittest_TestCase {
 		Koi::$mode = $old_mode;
 	}
 
+	/**
+	 * Provides test data for test_routing_number()
+	 *
+	 * @return  array
+	 */
+	public function provider_routing_number()
+	{
+		return array(
+			array('111000025', TRUE),
+			array('999999999', FALSE),
+		);
+	}
+
+	/**
+	 * @test
+	 * @dataProvider  provider_routing_number
+	 * @return  void
+	 */
+	public function test_routing_number($number, $expected)
+	{
+		$this->assertEquals(Koi_Valid::routing_number($number), $expected);
+	}
+
 }

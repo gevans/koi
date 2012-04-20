@@ -183,4 +183,43 @@ class Kohana_Koi_Valid {
 		return ( ! $date->is_expired());
 	}
 
+	/**
+	 * Tests if a check routing number by calculating a checksum and dividing it
+	 * by 10. The formula is:
+	 *
+	 *     (3(d1 + d4 + d7) + 7(d2 + d5 + d8) + 1(d3 + d6 + d9))mod 10 = 0
+	 *
+	 * @link    http://en.wikipedia.org/wiki/Routing_transit_number#Internal_checksums
+	 * @param   string|integer  $number  Routing number
+	 * @return  boolean  `TRUE` if valid, `FALSE` otherwise
+	 */
+	public static function routing_number($number)
+	{
+		// Strip all non-digits
+		$number = preg_replace('/[^\d]/', '', $number);
+
+		// Split the routing number into an array of characters
+		$d = str_split($number);
+
+		if (count($d) !== 9)
+		{
+			// Routing numbers *must* be 9 characters in length
+			return FALSE;
+		}
+
+		// Calculate a checksum
+		$checksum = ((3 * ($d[0] + $d[3] + $d[6])) +
+		             (7 * ($d[1] + $d[4] + $d[7])) +
+		                  ($d[2] + $d[5] + $d[8])) % 10;
+
+		if ($checksum == 0)
+		{
+			return TRUE;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+
 } // End Koi_Valid
