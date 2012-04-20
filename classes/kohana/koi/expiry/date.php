@@ -55,6 +55,25 @@ class Kohana_Koi_Expiry_Date {
 	}
 
 	/**
+	 * Handles retrieval of expiry date attributes.
+	 *
+	 * @param   string  $key  Attribute name
+	 * @return  mixed
+	 */
+	public function __get($key)
+	{
+		if ($key == 'expiration')
+		{
+			return $this->expiration();
+		}
+		else
+		{
+			throw new Kohana_Exception('The :property property does not exist in the Koi_Expiry_Date class',
+				array(':property' => $key));
+		}
+	}
+
+	/**
 	 * Gets the number of days in the expiration's month.
 	 *
 	 * @return  integer  Days in calendar month

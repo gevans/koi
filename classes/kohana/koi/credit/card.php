@@ -147,6 +147,16 @@ class Kohana_Koi_Credit_Card {
 		return Koi::mask($this->number);
 	}
 
+	public function expiry_date()
+	{
+		return new Koi_Expiry_Date($this->month, $this->year);
+	}
+
+	public function is_expired()
+	{
+		return $this->expiry_date->is_expired();
+	}
+
 	/**
 	 * Handles retrieval of all credit card attributes.
 	 *
