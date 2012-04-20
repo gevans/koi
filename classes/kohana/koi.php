@@ -64,12 +64,32 @@ class Kohana_Koi {
 	 *     }
 	 *
 	 * @chainable
-	 * @param   array  $options  Card information
-	 * @return  Koi_Credit_Card
+	 * @param   array   $attributes  Card information
+	 * @return  object  [Koi_Credit_Card]
 	 */
-	public static function credit_card(array $options = array())
+	public static function credit_card(array $attributes = array())
 	{
-		return new Koi_Credit_Card($options);
+		return new Koi_Credit_Card($attributes);
+	}
+
+	/**
+	 * Creates a new [Koi_Check] instance for validating bank checks.
+	 *
+	 *     $check = Koi::check(array(
+	 *         'first_name'          => 'Joe',
+	 *         'last_name'           => 'Blow',
+	 *         'routing_number'      => '111000025',
+	 *         'account_number'      => '123456789012',
+	 *         'account_holder_type' => 'personal',
+	 *         'account_type'        => 'checking',
+	 *     ));
+	 *
+	 * @param   array   $attributes  Check information
+	 * @return  object  [Koi_Check]
+	 */
+	public static function check(array $attributes = array())
+	{
+		return new Koi_Check($attributes);
 	}
 
 	/**
