@@ -20,7 +20,7 @@ Currently in the early stages of development.
 
 ## Special Thanks
 
-[Shopify](https://github.com/Shopify)'s [Active Merchant](https://github.com/Shopify/active_merchant) gem, written by Tobias Luetke, Cody Fauser, and contributors, has made integrating with various payment gateways much more enjoyable when working with Ruby. A lot of thought has been put into it which has motivated me to port it to PHP.
+[Shopify](https://github.com/Shopify)'s [Active Merchant](https://github.com/Shopify/active_merchant) gem, written by Tobias Luetke, Cody Fauser, and [contributors](https://github.com/Shopify/active_merchant/contributors), has made integrating with various payment gateways much more enjoyable when working with Ruby. A lot of thought has been put into it which has motivated me to port it to PHP.
 
 ## Copyright
 
