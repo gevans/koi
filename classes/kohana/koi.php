@@ -2,14 +2,14 @@
 /**
  * @package  Koi
  */
-abstract class Kohana_Koi {
+class Kohana_Koi {
 
 	// Current Koi version
 	const VERSION = '0.1.0';
 
 	// Environment modes
-	const PRODUCTION = 1;
-	const TESTING    = 2;
+	const PRODUCTION = 10;
+	const TESTING    = 20;
 
 	/**
 	 * @var  integer  Current mode, defaults to `Koi::PRODUCTION`
@@ -17,7 +17,37 @@ abstract class Kohana_Koi {
 	public static $mode = Koi::PRODUCTION;
 
 	/**
-	 * Creates a new `Koi_Credit_Card` instance for validating credit cards.
+	 * Instantiates a new [Koi_Gateway] for the specified gateway.
+	 *
+	 *     $gateway = Koi::gateway('authorizenet_cim'); // => Koi_Gateway_AuthorizeNet_CIM
+	 *
+	 * @param   string  $name     Gateway name
+	 * @param   array   $options  Additional options
+	 * @return  object  A subclass of [Koi_Gateway]
+	 */
+	public static function gateway($name, array $options = array())
+	{
+		$gateway = 'Koi_Gateway_'.ucfirst($name);
+		return new $gateway($options);
+	}
+
+	/**
+	 * Instantiates a new [Koi_Integration] for the specified integration.
+	 *
+	 *     $integration = Koi::integration('paypal'); // => Koi_Integration_PayPal
+	 *
+	 * @param   string  $name     Integration name
+	 * @param   array   $options  Additional options
+	 * @return  object  A subclass of [Koi_Integration]
+	 */
+	public static function integration($name, array $options = array())
+	{
+		$integration = 'Koi_Integration_'.ucfirst($name);
+		return new $integration($options);
+	}
+
+	/**
+	 * Creates a new [Koi_Credit_Card] instance for validating credit cards.
 	 *
 	 *     $credit_card = Koi::credit_card(array(
 	 *         'first_name'         => 'Joe',
