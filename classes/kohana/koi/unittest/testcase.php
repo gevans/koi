@@ -2,6 +2,9 @@
 /**
  * A version of the stock PHPUnit testcase that includes some extra helpers
  * and default settings
+ *
+ * @package   Koi
+ * @category  Unit Testing
  */
 abstract class Kohana_Koi_Unittest_TestCase extends Kohana_Unittest_TestCase {
 
