@@ -81,7 +81,7 @@ class Kohana_Koi_Credit_Card {
 		}
 
 		// Combine first and last names
-		return implode(array_filter(array($this->_attributes['first_name'], $this->_attributes['last_name']), 'mb_strlen'), ' ');
+		return implode(' ', array_filter(array($this->_attributes['first_name'], $this->_attributes['last_name']), 'mb_strlen'));
 	}
 
 	/**
@@ -239,7 +239,7 @@ class Kohana_Koi_Credit_Card {
 
 		if ($key == 'name')
 		{
-			return (isset($this->_attributes['first_name']) AND isset($this->_attributes['last_name']));
+			return (isset($this->_attributes['first_name']) OR isset($this->_attributes['last_name']));
 		}
 		else
 		{
@@ -403,6 +403,8 @@ class Kohana_Koi_Credit_Card {
 			$this->validate_card_number();
 			$this->validate_verification_value();
 			$this->validate_switch_or_solo_attributes();
+
+			$this->_validation->check();
 		}
 
 		return $this->_validation;
