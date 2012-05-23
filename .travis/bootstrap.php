@@ -3,17 +3,17 @@
 // -- Environment setup --------------------------------------------------------
 
 // Load the core Kohana class
-require SYSPATH.'classes/kohana/core'.EXT;
+require SYSPATH.'classes/Kohana/Core'.EXT;
 
-if (is_file(APPPATH.'classes/kohana'.EXT))
+if (is_file(APPPATH.'classes/Kohana'.EXT))
 {
 	// Application extends the core
-	require APPPATH.'classes/kohana'.EXT;
+	require APPPATH.'classes/Kohana'.EXT;
 }
 else
 {
 	// Load empty core extension
-	require SYSPATH.'classes/kohana'.EXT;
+	require SYSPATH.'classes/Kohana'.EXT;
 }
 
 /**
@@ -27,24 +27,40 @@ date_default_timezone_set('UTC');
 /**
  * Set the default locale.
  *
- * @see  http://kohanaframework.org/guide/using.configuration
- * @see  http://php.net/setlocale
+ * @link http://kohanaframework.org/guide/using.configuration
+ * @link http://php.net/setlocale
  */
 setlocale(LC_ALL, 'en_US.utf-8');
 
 /**
  * Enable the Kohana auto-loader.
  *
- * @see  http://kohanaframework.org/guide/using.autoloading
- * @see  http://php.net/spl_autoload_register
+ * @link http://kohanaframework.org/guide/using.autoloading
+ * @link http://php.net/spl_autoload_register
  */
 spl_autoload_register(array('Kohana', 'auto_load'));
 
 /**
  * Enable the Kohana auto-loader for unserialization.
  *
- * @see  http://php.net/spl_autoload_call
- * @see  http://php.net/manual/var.configuration.php#unserialize-callback-func
+ * @link http://php.net/spl_autoload_call
+ * @link http://php.net/manual/var.configuration.php#unserialize-callback-func
+ */
+ini_set('unserialize_callback_func', 'spl_autoload_call');
+
+/**
+ * Optionally, you can enable a compatibility auto-loader for use with
+ * older modules that have not been update for PSR-0.
+ *
+ * It is recommended to not enable this unless absolutely necessary.
+ */
+spl_autoload_register(array('Kohana', 'auto_load_lowercase'));
+
+/**
+ * Enable the Kohana auto-loader for unserialization.
+ *
+ * @link http://www.php.net/manual/function.spl-autoload-call
+ * @link http://www.php.net/manual/var.configuration#unserialize-callback-func
  */
 ini_set('unserialize_callback_func', 'spl_autoload_call');
 

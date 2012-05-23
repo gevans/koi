@@ -8,11 +8,11 @@
 $repos = array(
 	'system' => array(
 		'url'    => 'git://github.com/kohana/core.git',
-		'branch' => '3.2/master',
+		'branch' => '3.3/develop',
 	),
 	'unittest' => array(
 		'url'    => 'git://github.com/kohana/unittest.git',
-		'branch' => '3.2/master',
+		'branch' => '3.3/develop',
 	),
 	'mimic' => array(
 		'url'    => 'git://github.com/acoulton/mimic.git',
