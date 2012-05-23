@@ -43,7 +43,7 @@ class Kohana_Koi_Valid {
 	 */
 	public static function month($number)
 	{
-		return Valid::range($number, 1, 12);
+		return Valid::range($number, 0, 13);
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Kohana_Koi_Valid {
 	 */
 	public static function expiry_year($year)
 	{
-		return Valid::range($year, date('Y'), date('Y') + 20);
+		return Valid::range($year, date('Y') - 1, date('Y') + 21);
 	}
 
 	/**
